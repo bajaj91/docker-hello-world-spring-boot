@@ -36,8 +36,8 @@ podTemplate(containers: [containerTemplate(image: 'docker.io/jenkins/slave', nam
 	      //sh "sudo mv ./target/hello*.jar ./data"
               
            //   sh "kubectl  cluster-info"
-
-	      dockerImage = docker.build("hello-world-java")
+              sh 'docker build -t="hello-world-java" . '
+//	      dockerImage = docker.build("hello-world-java")
 		    }
 	}
 
