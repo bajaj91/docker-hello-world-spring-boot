@@ -35,8 +35,8 @@ podTemplate(containers: [containerTemplate(image: 'docker', name: 'docker', comm
               sh "whereis docker"
 
 	      dockerImage = docker.build("hello-world-java")
-	    }
-
+		    }
+	}
 
             }
         }
