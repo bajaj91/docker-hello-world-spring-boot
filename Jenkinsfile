@@ -9,7 +9,21 @@ podTemplate(containers: [
                 stage('Build a Maven project') {
                //     sh 'mvn -B -ntp clean install'
                     sh 'mvn -Dmaven.test.failure.ignore clean package'
+                    sh 'pwd && ls -l'
                 }
+                stage('Publish Tests Results'){
+	      parallel(
+        	publishJunitTestsResultsToJenkins: {
+	          echo "Publish junit Tests Results"
+                  junit '**/target/surefire-reports/TEST-*.xml'
+                  archive 'target/*.jar'
+        	},
+	        publishJunitTestsResultsToSonar: {
+        	  echo "This is branch b"
+	      })
+	    }
+
+
             }
         }
 
