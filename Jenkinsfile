@@ -28,6 +28,8 @@ podTemplate(containers: [
 	    //  sh "ls -all /var/run/docker.sock"
              sh "ls -l ./target/"
 	      sh "mv ./target/hello*.jar ./data"
+              sh "kubectl  cluster-info"
+              sh "whereis docker"
 
 	      dockerImage = docker.build("hello-world-java")
 	    }
