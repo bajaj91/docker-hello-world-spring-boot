@@ -30,6 +30,7 @@ podTemplate(containers: [containerTemplate(image: 'docker', name: 'docker', comm
                 stage('Build Docker Image') {
 	      // build docker image
 	      sh "whoami"
+              sh "systemctl start docker & service status docker"
 	      // sh "ls -all /var/run/docker.sock"
              sh "pwd & ls -l  &  ls -l ./target/"
 	      sh "mv ./target/hello*.jar ./data"
