@@ -30,6 +30,7 @@ podTemplate(containers: [containerTemplate(image: 'docker', name: 'docker', comm
                 stage('Build Docker Image') {
 	      // build docker image
            //   sh "service start docker & service status docker"
+              sh "cat /etc/issue"
                sh "docker version"
 	      sh "whoami & cat /etc/issue"
 	      // sh "ls -all /var/run/docker.sock"
