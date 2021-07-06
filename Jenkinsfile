@@ -33,7 +33,7 @@ podTemplate(containers: [containerTemplate(image: 'docker.io/jenkins/slave', nam
 //              sh "systemctl start docker & service status docker"
 	      // sh "ls -all /var/run/docker.sock"
              sh "pwd & ls -l  &  ls -l ./target/"
-	      sh "mv ./target/hello*.jar ./data"
+	      sh "sudo mv ./target/hello*.jar ./data"
               
            //   sh "kubectl  cluster-info"
 
