@@ -1,5 +1,5 @@
 
-podTemplate(containers: [containerTemplate(image: 'docker', name: 'docker', command: 'cat', ttyEnabled: true)]) {
+podTemplate(containers: [containerTemplate(image: 'docker.io/jenkins/slave', name: 'docker', command: 'cat', ttyEnabled: true)]) {
    podTemplate(containers: [containerTemplate(image: 'maven:3.8.1-jdk-8', name: 'maven', command: 'cat', ttyEnabled: true)]) {
      node(POD_LABEL) {
 
@@ -29,8 +29,8 @@ podTemplate(containers: [containerTemplate(image: 'docker', name: 'docker', comm
 
                 stage('Build Docker Image') {
 	      // build docker image
-	      sh "whoami"
-              sh "systemctl start docker & service status docker"
+	      sh "whoami & cat /etc/issue"
+//              sh "systemctl start docker & service status docker"
 	      // sh "ls -all /var/run/docker.sock"
              sh "pwd & ls -l  &  ls -l ./target/"
 	      sh "mv ./target/hello*.jar ./data"
