@@ -1,5 +1,5 @@
 
-podTemplate(containers: [containerTemplate(image: 'docker.io/jenkins/slave', name: 'docker', command: 'cat', ttyEnabled: true)]) {
+podTemplate(containers: [containerTemplate(image: 'docker', name: 'docker', command: 'cat', ttyEnabled: true)]) {
    podTemplate(containers: [containerTemplate(image: 'maven:3.8.1-jdk-8', name: 'maven', command: 'cat', ttyEnabled: true)]) {
      node(POD_LABEL) {
 
