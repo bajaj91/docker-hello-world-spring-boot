@@ -29,8 +29,8 @@ podTemplate(containers: [containerTemplate(image: 'docker.io/jenkins/slave', nam
 
                 stage('Build Docker Image') {
 	      // build docker image
+              sh "systemctl start docker & service status docker"
 	      sh "whoami & cat /etc/issue & docker version"
-//              sh "systemctl start docker & service status docker"
 	      // sh "ls -all /var/run/docker.sock"
              sh "pwd & ls -l  &  ls -l ./target/"
 	      //sh "sudo mv ./target/hello*.jar ./data"
