@@ -31,10 +31,12 @@ podTemplate(containers: [containerTemplate(image: 'docker', name: 'docker', comm
 	      // build docker image
 	      sh "whoami"
 	    //  sh "ls -all /var/run/docker.sock"
-             sh "pwd & ls -l & which kubectl &  ls -l ./target/"
+             sh "pwd & ls -l  &  ls -l ./target/"
+               sh "docker version"
 	      sh "mv ./target/hello*.jar ./data"
+              
            //   sh "kubectl  cluster-info"
-              sh "whereis docker"
+              sh "which  docker"
 
 	      dockerImage = docker.build("hello-world-java")
 		    }
