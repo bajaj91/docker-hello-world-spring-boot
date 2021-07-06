@@ -24,12 +24,14 @@ podTemplate(containers: [containerTemplate(image: 'docker', name: 'docker', comm
         	  echo "This is branch b"
 		      })
 	    }
+          }
+               container('docker') {
 
                 stage('Build Docker Image') {
 	      // build docker image
 	      sh "whoami"
 	    //  sh "ls -all /var/run/docker.sock"
-             sh "ls -l ./target/"
+             sh "pwd & ls -l & which kubectl &  ls -l ./target/"
 	      sh "mv ./target/hello*.jar ./data"
            //   sh "kubectl  cluster-info"
               sh "whereis docker"
