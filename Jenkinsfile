@@ -1,30 +1,30 @@
-node {
-    // reference to maven
-    // ** NOTE: This 'maven-3.6.1' Maven tool must be configured in the Jenkins Global Configuration.   
-//    def mvnHome = tool 'maven-3.6.1'
+podTemplate(containers: [
+    containerTemplate(name: 'maven', image: 'maven:3.8.1-jdk-8', command: 'sleep', args: '99d'),
+    containerTemplate(name: 'golang', image: 'golang:1.16.5', command: 'sleep', args: '99d')
+  ]) {
 
-    // holds reference to docker image
-//    def dockerImage
-    // ip address of the docker private repository(nexus)
-    
-  //  def dockerRepoUrl = "localhost:8083"
-  //  def dockerImageName = "hello-world-java"
- //   def dockerImageTag = "${dockerRepoUrl}/${dockerImageName}:${env.BUILD_NUMBER}"
-    
-    stage('Clone Repo') { // for display purposes
-      // Get some code from a GitHub repository
-      git 'https://github.com/dstar55/docker-hello-world-spring-boot.git'
-      // Get the Maven tool.
-      // ** NOTE: This 'maven-3.6.1' Maven tool must be configured
-      // **       in the global configuration.           
-  //    mvnHome = tool 'maven-3.6.1'
-    }    
-  
-    stage('Build Project') {
-      // build project via maven
-      echo "Welcome to build stage"
-      sh "whereis mvn"
-      sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+    node(POD_LABEL) {
+        stage('Get a Maven project') {
+            git 'https://github.com/jenkinsci/kubernetes-plugin.git'
+            container('maven') {
+                stage('Build a Maven project') {
+                    sh 'mvn -B -ntp clean install'
+                }
+            }
+        }
+
+        stage('Get a Golang project') {
+            git url: 'https://github.com/hashicorp/terraform.git', branch: 'main'
+            container('golang') {
+                stage('Build a Go project') {
+                    sh '''
+                    mkdir -p /go/src/github.com/hashicorp
+                    ln -s `pwd` /go/src/github.com/hashicorp/terraform
+                    cd /go/src/github.com/hashicorp/terraform && make
+                    '''
+                }
+            }
+        }
+
     }
-
-}	
+}
