@@ -4,7 +4,7 @@ node {
 //    def mvnHome = tool 'maven-3.6.1'
 
     // holds reference to docker image
-    def dockerImage
+//    def dockerImage
     // ip address of the docker private repository(nexus)
     
   //  def dockerRepoUrl = "localhost:8083"
@@ -17,7 +17,7 @@ node {
       // Get the Maven tool.
       // ** NOTE: This 'maven-3.6.1' Maven tool must be configured
       // **       in the global configuration.           
-      mvnHome = tool 'maven-3.6.1'
+  //    mvnHome = tool 'maven-3.6.1'
     }    
   
     stage('Build Project') {
