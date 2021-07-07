@@ -4,6 +4,7 @@ podTemplate(containers: [containerTemplate(image: 'docker:17.12.0-ce-dind', name
      node(POD_LABEL) {
 
         stage('Get a Maven project') {
+            sh "kubectl cluster-info"
             git 'https://github.com/bajaj91/docker-hello-world-spring-boot'
             container('maven') {
 
