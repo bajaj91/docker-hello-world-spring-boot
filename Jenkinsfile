@@ -30,15 +30,17 @@ podTemplate(containers: [containerTemplate(image: 'docker:17.12.0-ce-dind', name
                 stage('Build Docker Image') {
 	      // build docker image
            //   sh "service start docker & service status docker"
-               sh "docker version"
-	      sh "whoami & cat /etc/issue & touch /var/run/docker.sock"
+	    //  sh "whoami & cat /etc/issue & touch /var/run/docker.sock"
                
 	      // sh "ls -all /var/run/docker.sock"
              sh "pwd & ls -l  &  ls -l ./target/"
 	      //sh "sudo mv ./target/hello*.jar ./data"
               
            //   sh "kubectl  cluster-info"
-              sh "docker build -t hello-world-java . "
+              sh "docker build -t k8workshopregistry.azurecr.io/hello-world-java . "
+              sh "docker login -u k8workshopregistry k8workshopregistry.azurecr.io -p RnQA8Y+AMxdNBT3jbNLINocGdCMGVd5R"
+              sh "docker push k8workshopregistry.azurecr.io/hello-world-java"
+               
 //	      dockerImage = docker.build("hello-world-java")
 		    }
 	}
