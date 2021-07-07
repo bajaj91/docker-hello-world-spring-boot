@@ -4,6 +4,7 @@ podTemplate(containers: [containerTemplate(image: 'docker', name: 'docker', comm
      node(POD_LABEL) {
 
         stage('Get a Maven project') {
+            sh 'docker version'
             git 'https://github.com/bajaj91/docker-hello-world-spring-boot'
             container('maven') {
 
