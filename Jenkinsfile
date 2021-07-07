@@ -1,9 +1,10 @@
 
 podTemplate(containers: [containerTemplate(image: 'docker:17.12.0-ce-dind', name: 'docker', privileged: true, ttyEnabled: true)]){
    podTemplate(containers: [containerTemplate(image: 'maven:3.8.1-jdk-8', name: 'maven', command: 'cat', ttyEnabled: true)]) {
-     node  {
+	podTemplate(containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:latest', command: 'cat', ttyEnabled: true)]){
+     node (POD_LABEL) {
         stage('Get a Maven project') {
-            sh "kubectl cluster-info"
+            //sh "kubectl cluster-info"
             git 'https://github.com/bajaj91/docker-hello-world-spring-boot'
             container('maven') {
 
@@ -44,9 +45,14 @@ podTemplate(containers: [containerTemplate(image: 'docker:17.12.0-ce-dind', name
 //	      dockerImage = docker.build("hello-world-java")
 		    }
 	}
+             container('helm'){
+              stage('Deploy image'){
+              sh "kubectl cluster-info"
+              }
+	    }
 
             }
         }
     }
 }
-
+}
