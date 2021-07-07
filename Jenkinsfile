@@ -1,10 +1,9 @@
 
-podTemplate(containers: [containerTemplate(image: 'docker', name: 'docker', command: 'cat', ttyEnabled: true)]){
+podTemplate(containers: [containerTemplate(image: 'docker:17.12.0-ce-dind', name: 'docker', privileged: true, ttyEnabled: true)]){
    podTemplate(containers: [containerTemplate(image: 'maven:3.8.1-jdk-8', name: 'maven', command: 'cat', ttyEnabled: true)]) {
      node(POD_LABEL) {
 
         stage('Get a Maven project') {
-            sh "find / -iname 'docker*' "
             git 'https://github.com/bajaj91/docker-hello-world-spring-boot'
             container('maven') {
 
