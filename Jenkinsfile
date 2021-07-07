@@ -30,7 +30,7 @@ podTemplate(containers: [containerTemplate(image: 'docker:17.12.0-ce-dind', name
                 stage('Build Docker Image') {
 	      // build docker image
            //   sh "service start docker & service status docker"
-             //  sh "docker version"
+               sh "docker version"
 	      sh "whoami & cat /etc/issue & touch /var/run/docker.sock"
                
 	      // sh "ls -all /var/run/docker.sock"
