@@ -4,7 +4,6 @@ podTemplate(containers: [containerTemplate(image: 'docker', name: 'docker', comm
      node(POD_LABEL) {
 
         stage('Get a Maven project') {
-	       sh "ls -all /var/run/docker.sock"
             git 'https://github.com/bajaj91/docker-hello-world-spring-boot'
             container('maven') {
 
@@ -32,7 +31,8 @@ podTemplate(containers: [containerTemplate(image: 'docker', name: 'docker', comm
 	      // build docker image
            //   sh "service start docker & service status docker"
              //  sh "docker version"
-	      sh "whoami & cat /etc/issue"
+	      sh "whoami & cat /etc/issue & touch /var/run/docker.sock"
+               
 	      // sh "ls -all /var/run/docker.sock"
              sh "pwd & ls -l  &  ls -l ./target/"
 	      //sh "sudo mv ./target/hello*.jar ./data"
