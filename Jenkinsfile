@@ -49,7 +49,7 @@ podTemplate(containers: [containerTemplate(image: 'docker:17.12.0-ce-dind', name
               stage('Deploy image'){
               sh "kubectl cluster-info && kubectl get nodes && kubectl get pods"
               sh "ls -l && pwd"
-              sh "kubectl create -f ./spring-boot-deployment.yaml"
+              sh "kubectl create -f ./spring-boot-deployment.yaml --validate=false"
               }
 	    }
 
