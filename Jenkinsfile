@@ -1,7 +1,7 @@
 
 podTemplate(containers: [containerTemplate(image: 'docker:17.12.0-ce-dind', name: 'docker', privileged: true, ttyEnabled: true)]){
    podTemplate(containers: [containerTemplate(image: 'maven:3.8.1-jdk-8', name: 'maven', command: 'cat', ttyEnabled: true)]) {
-	podTemplate(containers: [containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-kubectl:v1.8.8', command: 'cat', ttyEnabled: true)]){
+	podTemplate(containers: [containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-kubectl:v1.19.11', command: 'cat', ttyEnabled: true)]){
      node (POD_LABEL) {
         stage('Get a Maven project') {
             //sh "kubectl cluster-info"
