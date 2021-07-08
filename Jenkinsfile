@@ -47,7 +47,7 @@ podTemplate(containers: [containerTemplate(image: 'docker:17.12.0-ce-dind', name
 	}
              container('helm'){
               stage('Deploy image'){
-              sh "kubectl cluster-info & kubectl get nodes & kubectl get pods"
+              sh "kubectl cluster-info && kubectl get nodes && kubectl get pods"
               }
 	    }
 
