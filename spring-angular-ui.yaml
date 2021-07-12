@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spring-boot-ui
+  name: spring-boot-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-boot-ui
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: spring-boot-ui
+    spec:
+      containers:
+      - image: k8workshopregistry.azurecr.io/spring-boot-ui:latest
+        name:  spring-boot-ui
+        resources: {}
+      imagePullSecrets:
+      - name: acr-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spring-boot-ui
+  name: spring-boot-ui
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: spring-boot-ui
+  type: LoadBalancer

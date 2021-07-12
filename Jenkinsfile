@@ -27,13 +27,13 @@ podTemplate(containers: [containerTemplate(image: 'docker:17.12.0-ce-dind', name
                container('docker') {
 
                 stage('Build Docker Image') {
+                sh "docker login -u k8workshopregistry k8workshopregistry.azurecr.io -p RnQA8Y+AMxdNBT3jbNLINocGdCMGVd5R"
                 sh "docker build -t k8workshopregistry.azurecr.io/hello-world-java . "
                // sh "ls -l && cd UI && ls -l"
                 sh "docker build -t k8workshopregistry.azurecr.io/spring-boot-ui UI/ "
-                sh "docker login -u k8workshopregistry k8workshopregistry.azurecr.io -p RnQA8Y+AMxdNBT3jbNLINocGdCMGVd5R"
                 sh "docker push k8workshopregistry.azurecr.io/hello-world-java"
                 sh "docker push k8workshopregistry.azurecr.io/spring-boot-ui"
-                sh "docker images"
+           //     sh "docker images"
 //	      dockerImage = docker.build("hello-world-java")
 		    }
 	}
