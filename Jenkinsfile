@@ -28,12 +28,15 @@ podTemplate(containers: [containerTemplate(image: 'docker:17.12.0-ce-dind', name
 
                 stage('Build Docker Image') {
                 sh "docker build -t k8workshopregistry.azurecr.io/hello-world-java . "
+                sh "ls -l && cd UI && ls -l"
                 sh "docker login -u k8workshopregistry k8workshopregistry.azurecr.io -p RnQA8Y+AMxdNBT3jbNLINocGdCMGVd5R"
                 sh "docker push k8workshopregistry.azurecr.io/hello-world-java"
 //	      dockerImage = docker.build("hello-world-java")
 		    }
 	}
-             container('helm'){
+ 	                
+
+              container('helm'){
               stage('Deploy image'){
               sh "kubectl apply -f ./spring-boot-deployment.yaml"
               sh "kubectl get pods"
