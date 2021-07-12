@@ -11,7 +11,7 @@ export class AppComponent {
   response = "No data loaded, yet";
   constructor(private http: HttpClient) 
   { 
-    this.http.get('http://localhost/demo', {responseType: 'text'}).subscribe((response: any) => {
+    this.http.get('http://spring-boot-frontend:8080', {responseType: 'text'}).subscribe((response: any) => {
       console.log(response);
 	  this.response = response;		
 	});
