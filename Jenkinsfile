@@ -4,7 +4,7 @@ podTemplate(containers: [containerTemplate(image: 'docker:17.12.0-ce-dind', name
 	podTemplate(containers: [containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-kubectl:v1.19.11', command: 'cat', ttyEnabled: true)]){
      node (POD_LABEL) {
         stage('Get a Maven project') {
-            git 'https://github.com/bajaj91/docker-hello-world-spring-boot'
+            git 'https://github.com/bajaj91/docker-hello-world-angular'
             container('maven') {
 
                 stage('Build a Maven project') {
@@ -30,9 +30,9 @@ podTemplate(containers: [containerTemplate(image: 'docker:17.12.0-ce-dind', name
                 sh "docker login -u k8workshopregistry k8workshopregistry.azurecr.io -p RnQA8Y+AMxdNBT3jbNLINocGdCMGVd5R"
                 sh "docker build -t k8workshopregistry.azurecr.io/hello-world-java . "
                // sh "ls -l && cd UI && ls -l"
-                sh "docker build -t k8workshopregistry.azurecr.io/spring-boot-ui UI/ "
+                sh "docker build -t k8workshopregistry.azurecr.io/angular-ui UI/ "
                 sh "docker push k8workshopregistry.azurecr.io/hello-world-java"
-                sh "docker push k8workshopregistry.azurecr.io/spring-boot-ui"
+                sh "docker push k8workshopregistry.azurecr.io/angular-ui"
            //     sh "docker images"
 //	      dockerImage = docker.build("hello-world-java")
 		    }
@@ -41,7 +41,7 @@ podTemplate(containers: [containerTemplate(image: 'docker:17.12.0-ce-dind', name
 
               container('helm'){
               stage('Deploy image'){
-              sh "kubectl apply -f ./spring-boot-deployment.yaml"
+              sh "kubectl apply -f ./angular-deployment.yaml"
               sh "kubectl get pods"
               }
 	    }
