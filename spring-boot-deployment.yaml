@@ -26,14 +26,16 @@ spec:
             httpHeaders:
             - name: Custom-Header
               value: "Hello World"
-          initialDelaySeconds: 3
+          initialDelaySeconds: 10
           periodSeconds: 3
         readinessProbe:
-          exec:
-            command:
-            - df
+          httpGet:
+            port: 8080
+            httpHeaders:
+            - name: Custom-Header
+              value: "Hello World"
           initialDelaySeconds: 10
-          periodSeconds: 10
+          periodSeconds: 3
       imagePullSecrets:
       - name: acr-secret
 ---
