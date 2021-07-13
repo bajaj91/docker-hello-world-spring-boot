@@ -3,24 +3,37 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: spring-boot-frontend
-  name: spring-boot-frontend
+    app: spring-demo-api
+  name: spring-demo-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: spring-boot-frontend
+      app: spring-demo-api
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: spring-boot-frontend
+        app: spring-demo-api
     spec:
       containers:
       - image: k8workshopregistry.azurecr.io/hello-world-java:latest
-        name:  spring-boot-frontend
-        resources: {}
+        name:  spring-demo-api
+        livenessProbe:
+          httpGet:
+            port: 8080
+            httpHeaders:
+            - name: Custom-Header
+              value: "Hello World"
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        readinessProbe:
+          exec:
+            command:
+            - df
+          initialDelaySeconds: 10
+          periodSeconds: 10
       imagePullSecrets:
       - name: acr-secret
 ---
@@ -29,13 +42,13 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    app: spring-boot-frontend
-  name: spring-boot-frontend
+    app: spring-demo-api
+  name: spring-demo-api
 spec:
   ports:
   - port: 8080
     protocol: TCP
     targetPort: 8080
   selector:
-    app: spring-boot-frontend
+    app: spring-demo-api
   type: LoadBalancer
