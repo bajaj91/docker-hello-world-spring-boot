@@ -9,7 +9,7 @@ pipeline {
   agent any 
    
     stages {
-        stage(LOad variables){
+        stage('Load variables'){
           steps {
           regUrl = "k8workshopregistry.azurecr.io"
           appImage = "hello-world-java";
