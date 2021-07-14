@@ -23,6 +23,7 @@
                     }
             }
              stage('Deploy image'){
+		     steps {
                       sh """
         		      kubectl apply -f ./spring-boot-deployment.yaml
 		              kubectl apply -f ./spring-angular-ui.yaml
@@ -32,5 +33,5 @@
 	   	 }
 
         }
-     
+    }
 
