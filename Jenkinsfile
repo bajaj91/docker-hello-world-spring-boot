@@ -33,11 +33,11 @@ pipeline {
                 """
                     }
             }
-	      stage('Vulnerability Scan w/Twistlock') {
+	    /*  stage('Vulnerability Scan w/Twistlock') {
 		      steps {
       twistlock.scanImage("k8workshopregistry.azurecr.io/hello-world-java:latest")
     }
-	      }	      
+	      }	    */  
         
         stage('Scan') {
             steps {
