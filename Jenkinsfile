@@ -8,7 +8,6 @@
       stages {
         stage('Get a Maven project') {
            steps {
-            git 'https://github.com/bajajamit09/docker-hello-world-spring-boot.git'
              sh 'mvn -Dmaven.test.failure.ignore clean package'
             
           } 
