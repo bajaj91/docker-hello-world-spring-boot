@@ -6,10 +6,8 @@
 
 
 pipeline {
-  agent any 
-  
-    stages {
-      environment {
+  agent any {
+environment {
         regUrl = "k8workshopregistry.azurecr.io"
         appImage = "hello-world-java";
         apiImage = "angular-ui"
@@ -17,6 +15,11 @@ pipeline {
         buildTag = "Build-${BUILD_NUMBER}";
         releaseTag = "qa";
       }
+  }
+   
+  
+    stages {
+     
         stage('Get a Maven project') {
            steps {
             sh 'mvn -Dmaven.test.failure.ignore clean package'
