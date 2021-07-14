@@ -8,56 +8,12 @@
               }
       stages {
         stage('Get a Maven project') {
+           steps {
             git 'https://github.com/bajajamit09/docker-hello-world-spring-boot.git'
-            container('maven') {
+             sh 'mvn -Dmaven.test.failure.ignore clean package'
+            
+          }               
 
-                stage('Build a Maven project') {
-               //   sh 'mvn -B -ntp clean install'
-                    sh 'mvn -Dmaven.test.failure.ignore clean package'
-                }
-
-                stage('Publish Tests Results'){
-	         parallel(
-        	  publishJunitTestsResultsToJenkins: {
-	          echo "Publish junit Tests Results"
-                  junit '**/target/surefire-reports/TEST-*.xml'
-                  archive 'target/*.jar'
-        	},
-	        publishJunitTestsResultsToSonar: {
-        	  echo "This is branch b"
-		      })
-	    }
-          }
-               container('docker') {
-
-                stage('Build Docker Image') {
-                sh "docker login -u k8workshopregistry k8workshopregistry.azurecr.io -p RnQA8Y+AMxdNBT3jbNLINocGdCMGVd5R"
-                sh "docker build -t k8workshopregistry.azurecr.io/hello-world-java . "
-               // sh "ls -l && cd UI && ls -l"
-                sh "docker build -t k8workshopregistry.azurecr.io/angular-ui UI/ "
-                sh "docker push k8workshopregistry.azurecr.io/hello-world-java"
-                sh "docker push k8workshopregistry.azurecr.io/angular-ui"
-           //     sh "docker images"
-//	      dockerImage = docker.build("hello-world-java")
-		    }
-	}
- 	                
-
-              container('alpine'){
-		stage('Scan Image'){
-                sh "docker login -u k8workshopregistry k8workshopregistry.azurecr.io -p RnQA8Y+AMxdNBT3jbNLINocGdCMGVd5R"
-                	 sh "ls -l && pwd && ls -l /var/run/docker.sock"
-			}
-		}
-              container('kubectl'){
-	              stage('Deploy image'){
-        		      sh "kubectl apply -f ./spring-boot-deployment.yaml"
-		              sh "kubectl apply -f ./spring-angular-ui.yaml"
-		              sh "kubectl get pods"
-		              }
-	   	 }
 
             }
         }
-    
-}
