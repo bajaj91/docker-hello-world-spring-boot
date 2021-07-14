@@ -42,7 +42,7 @@ podTemplate(containers: [containerTemplate(image: 'docker:17.12.0-ce-dind', name
 
               container('alpine'){
 		stage('Scan Image'){
-                sh "docker build -t k8workshopregistry.azurecr.io/hello-world-java . "
+                sh "docker login -u k8workshopregistry k8workshopregistry.azurecr.io -p RnQA8Y+AMxdNBT3jbNLINocGdCMGVd5R"
                 	 sh "ls -l && pwd && ls -l /var/run/docker.sock"
 			}
 		}
