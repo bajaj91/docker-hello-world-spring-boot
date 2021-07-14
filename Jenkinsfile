@@ -16,7 +16,6 @@
             stage('Build Docker Image') {
                 steps {
                 sh """ 
-                docker login -u k8workshopregistry k8workshopregistry.azurecr.io -p RnQA8Y+AMxdNBT3jbNLINocGdCMGVd5R
                 docker build -t k8workshopregistry.azurecr.io/hello-world-java . 
                 docker build -t k8workshopregistry.azurecr.io/angular-ui UI/ 
                 docker push k8workshopregistry.azurecr.io/hello-world-java
@@ -24,5 +23,14 @@
                 """
                     }
             }
+             stage('Deploy image'){
+                      sh """
+        		      kubectl apply -f ./spring-boot-deployment.yaml
+		              kubectl apply -f ./spring-angular-ui.yaml
+		              kubectl get pods
+                      """
+		              }
+	   	 }
+
         }
      }
