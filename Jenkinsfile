@@ -3,22 +3,30 @@
 //   podTemplate(containers: [containerTemplate(image: 'maven:3.8.1-jdk-8', name: 'maven', command: 'cat', ttyEnabled: true)]) {
 //	podTemplate(containers: [containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.19.11', command: 'cat', ttyEnabled: true)]){
 //		podTemplate(containers: [containerTemplate(name: 'alpine', image: 'twistian/alpine:latest', command: 'cat', ttyEnabled: true)]){
-    pipeline {
-       agent any 
-      stages {
+pipeline {
+  agent any 
+    stages {
         stage('Get a Maven project') {
            steps {
-             sh 'mvn -Dmaven.test.failure.ignore clean package'
-            
-          } 
-        } 
+            sh 'mvn -Dmaven.test.failure.ignore clean package'
+            } 
+          }
+      environment {
+        regUrl = "k8workshopregistry.azurecr.io"
+        appImage = "hello-world-java";
+        apiImage = "angular-ui"
+        latestTag = "latest";
+        buildTag = "Build-${BUILD_NUMBER}";
+        releaseTag = "qa";
+      }
+ 
             stage('Build Docker Image') {
                 steps {
                 sh """ 
-                docker build -t k8workshopregistry.azurecr.io/hello-world-java . 
-                docker build -t k8workshopregistry.azurecr.io/angular-ui UI/ 
-                docker push k8workshopregistry.azurecr.io/hello-world-java
-                docker push k8workshopregistry.azurecr.io/angular-ui
+                docker build -t $regUrl/$appImage:$latestTag . 
+                docker build -t $regUrl/$apiImage:$latestTag  UI/ 
+                docker push $regUrl/$appImage:$latestTag
+                docker push $regUrl/$apiImage:$latestTag
                 """
                     }
             }
