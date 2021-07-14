@@ -4,7 +4,8 @@
 //	podTemplate(containers: [containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.19.11', command: 'cat', ttyEnabled: true)]){
 //		podTemplate(containers: [containerTemplate(name: 'alpine', image: 'twistian/alpine:latest', command: 'cat', ttyEnabled: true)]){
     pipeline {
-       agent any {
+       agent none {
+              }
         stage('Get a Maven project') {
             git 'https://github.com/bajajamit09/docker-hello-world-spring-boot.git'
             container('maven') {
@@ -57,5 +58,5 @@
 
             }
         }
-    }
+    
 
