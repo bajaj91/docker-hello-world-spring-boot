@@ -19,7 +19,7 @@
                 docker login -u k8workshopregistry k8workshopregistry.azurecr.io -p RnQA8Y+AMxdNBT3jbNLINocGdCMGVd5R
                 docker build -t k8workshopregistry.azurecr.io/hello-world-java . 
                 docker build -t k8workshopregistry.azurecr.io/angular-ui UI/ 
-                docker push k8workshopregistry.azurecr.io/hello-world-java"
+                docker push k8workshopregistry.azurecr.io/hello-world-java
                 docker push k8workshopregistry.azurecr.io/angular-ui
                 """
                     }
