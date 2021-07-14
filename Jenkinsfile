@@ -10,7 +10,7 @@ pipeline {
    
     stages {
         stage('Load variables'){
-          steps {
+          
          def regUrl = "k8workshopregistry.azurecr.io"
           def appImage = "hello-world-java";
           def apiImage = "angular-ui"
@@ -18,7 +18,7 @@ pipeline {
           def buildTag = "Build-${BUILD_NUMBER}";
           def releaseTag = "qa";
           }
-        }
+        
      
         stage('Get a Maven project') {
            steps {
