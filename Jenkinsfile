@@ -11,12 +11,12 @@ pipeline {
     stages {
         stage('Load variables'){
           steps {
-          regUrl = "k8workshopregistry.azurecr.io"
-          appImage = "hello-world-java";
-          apiImage = "angular-ui"
-          latestTag = "latest";
-          buildTag = "Build-${BUILD_NUMBER}";
-          releaseTag = "qa";
+         def regUrl = "k8workshopregistry.azurecr.io"
+          def appImage = "hello-world-java";
+          def apiImage = "angular-ui"
+          def latestTag = "latest";
+          def buildTag = "Build-${BUILD_NUMBER}";
+          def releaseTag = "qa";
           }
         }
      
