@@ -7,19 +7,15 @@
 
 pipeline {
   agent any 
-   
-    stages {
-        stage('Load variables'){
-          
-         def regUrl = "k8workshopregistry.azurecr.io"
+     environemt {
+          def regUrl = "k8workshopregistry.azurecr.io"
           def appImage = "hello-world-java";
           def apiImage = "angular-ui"
           def latestTag = "latest";
           def buildTag = "Build-${BUILD_NUMBER}";
           def releaseTag = "qa";
-          }
-        
-     
+     }
+    stages {
         stage('Get a Maven project') {
            steps {
             sh 'mvn -Dmaven.test.failure.ignore clean package'
