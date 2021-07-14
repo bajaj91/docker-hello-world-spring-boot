@@ -22,6 +22,22 @@
                 """
                     }
             }
+        
+        stage('Scan') {
+            steps {
+                // Scan the image
+                prismaCloudScanImage ca: '',
+                cert: '',
+                dockerAddress: 'unix:///var/run/docker.sock',
+                image: 'k8workshopregistry.azurecr.io/hello-world-java:latest',
+                key: '',
+                logLevel: 'info',
+                podmanPath: '',
+                project: '',
+                resultsFile: 'prisma-cloud-scan-results.json',
+                ignoreImageBuildTime:true
+            }
+        }
              stage('Deploy image'){
 		     steps {
                       sh """
