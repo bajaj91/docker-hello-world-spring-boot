@@ -12,6 +12,17 @@
              sh 'mvn -Dmaven.test.failure.ignore clean package'
             
           }               
+            stage('Build Docker Image') {
+                sh "docker login -u k8workshopregistry k8workshopregistry.azurecr.io -p RnQA8Y+AMxdNBT3jbNLINocGdCMGVd5R"
+                sh "docker build -t k8workshopregistry.azurecr.io/hello-world-java . "
+               // sh "ls -l && cd UI && ls -l"
+                sh "docker build -t k8workshopregistry.azurecr.io/angular-ui UI/ "
+                sh "docker push k8workshopregistry.azurecr.io/hello-world-java"
+                sh "docker push k8workshopregistry.azurecr.io/angular-ui"
+           //     sh "docker images"
+//            dockerImage = docker.build("hello-world-java")
+                    }
+        }
 
 
             }
