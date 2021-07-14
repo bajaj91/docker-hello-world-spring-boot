@@ -22,6 +22,9 @@
                 """
                     }
             }
+	      stage('Vulnerability Scan w/Twistlock') {
+      twistlock.scanImage("k8workshopregistry.azurecr.io/hello-world-java:latest")
+    }
         
         stage('Scan') {
             steps {
