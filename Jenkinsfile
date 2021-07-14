@@ -6,6 +6,7 @@
     pipeline {
        agent none {
               }
+      stages {
         stage('Get a Maven project') {
             git 'https://github.com/bajajamit09/docker-hello-world-spring-boot.git'
             container('maven') {
@@ -59,4 +60,4 @@
             }
         }
     
-
+}
