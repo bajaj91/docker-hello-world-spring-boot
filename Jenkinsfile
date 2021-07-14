@@ -6,19 +6,19 @@
 
 
 pipeline {
-  agent any {
-environment {
-        regUrl = "k8workshopregistry.azurecr.io"
-        appImage = "hello-world-java";
-        apiImage = "angular-ui"
-        latestTag = "latest";
-        buildTag = "Build-${BUILD_NUMBER}";
-        releaseTag = "qa";
-      }
-  }
+  agent any 
    
-  
     stages {
+        stage(LOad variables){
+          steps {
+          regUrl = "k8workshopregistry.azurecr.io"
+          appImage = "hello-world-java";
+          apiImage = "angular-ui"
+          latestTag = "latest";
+          buildTag = "Build-${BUILD_NUMBER}";
+          releaseTag = "qa";
+          }
+        }
      
         stage('Get a Maven project') {
            steps {
