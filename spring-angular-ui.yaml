@@ -20,7 +20,16 @@ spec:
       containers:
       - image: k8workshopregistry.azurecr.io/angular-ui:latest
         name:  angular-ui
-        resources: {}
+        readinessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 5
       imagePullSecrets:
       - name: acr-secret
 ---
