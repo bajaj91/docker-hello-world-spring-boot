@@ -23,7 +23,7 @@ pipeline {
                 steps {
                 sh """ 
                 docker build -t $regUrl/$appImage:$latestTag . 
-                docker build -t $regUrl/$apiImage:$latestTag  ${dockerRepo}/
+                docker build -t $regUrl/$apiImage:$latestTag  angular-ui/
                 docker push $regUrl/$appImage:$latestTag
                 docker push $regUrl/$apiImage:$latestTag
                 """
