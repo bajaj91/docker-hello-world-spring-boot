@@ -2,7 +2,7 @@ pipeline {
   agent any 
      environment {
           def regUrl = "k8workshopregistry.azurecr.io"
-          def appImage = "hello-world-java";
+          def appImage = "spring-demo-api";
           def apiImage = "angular-ui"
           def dockerRepo = "angular-ui"
           def latestTag = "latest";
