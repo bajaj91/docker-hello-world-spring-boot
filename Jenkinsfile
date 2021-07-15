@@ -6,7 +6,7 @@ pipeline {
           def apiImage = "angular-ui"
           def dockerRepo = "angular-ui"
           def latestTag = "latest";
-          def buildNumber = env.BUILD_ID
+          def buildNumber = "env.BUILD_ID"
           def buildTag = "Build-${BUILD_NUMBER}";
           def releaseTag = "qa";
      }
