@@ -57,7 +57,7 @@ pipeline {
                 ignoreImageBuildTime:true
             }
         }*/
-           stage("Deploy to AKS Prod-Ext") {
+           stage("Deploy Spring Boot Demo API") {
               steps {
           //  def ticketId = mozart.openAksRfc(buildProdMozartRequest())
           //  withCredentials([prodAzureSecretRepo]) {
@@ -72,6 +72,20 @@ pipeline {
                 "1" // replica count
                }
             }
+           stage("Deploy Angular-UI") {
+              steps {
+          //  def ticketId = mozart.openAksRfc(buildProdMozartRequest())
+          //  withCredentials([prodAzureSecretRepo]) {
+              sh "./angular-ui.sh " +
+                "${pullSecret} " + //repo
+                "${environment} " + //environment
+                "${namespace} " + //namespace
+              //  "${IMAGE_NAME} " + //image name
+                "${env.BUILD_ID} " + //image version
+             //   "${DOCKER_REPO} " + //docker repo
+                "${acr} " + //azure registry
+                "1" // replica count
+               }
            /*  stage('Deploy image'){
 		          steps {
                       sh """
