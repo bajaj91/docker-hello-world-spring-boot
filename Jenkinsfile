@@ -55,6 +55,7 @@ pipeline {
             }
         }*/
            stage("Deploy to AKS Prod-Ext") {
+              steps {
           //  def ticketId = mozart.openAksRfc(buildProdMozartRequest())
           //  withCredentials([prodAzureSecretRepo]) {
               environment = 'dev'
@@ -69,6 +70,7 @@ pipeline {
              //   "${DOCKER_REPO} " + //docker repo
                 "${acr} " + //azure registry
                 "3" // replica count
+               }
             }
            /*  stage('Deploy image'){
 		          steps {
