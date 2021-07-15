@@ -15,6 +15,7 @@ pipeline {
     stages {
         stage('Get a Maven project') {
            steps {
+            echo "Git Branch Name Is ${env.GIT_BRANCH}"
             echo 'env.GIT_BRANCH'
             //sh "echo ${buildNumber}"
             //sh 'printenv'
