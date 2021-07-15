@@ -6,7 +6,7 @@
 
 
 pipeline {
-  agent any {
+  agent any 
      environment {
           def regUrl = "k8workshopregistry.azurecr.io"
           def appImage = "hello-world-java";
@@ -15,9 +15,10 @@ pipeline {
           def buildTag = "Build-${BUILD_NUMBER}";
           def releaseTag = "qa";
      }
-  }
+  
     stages {
         stage('Get a Maven project') {
+          agent { docker 'maven:3.8.1-adoptopenjdk-11' }
            steps {
             sh 'mvn -Dmaven.test.failure.ignore clean package'
             } 
