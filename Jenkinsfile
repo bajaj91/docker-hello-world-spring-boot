@@ -10,6 +10,7 @@ pipeline {
           branchName = "${env.GIT_BRANCH}"
           def buildTag = "build-${BUILD_NUMBER}";
           def releaseTag = "qa";
+          def pullSecret = "acr-secret"
      }
   
     stages {
@@ -24,10 +25,10 @@ pipeline {
                 steps {
                 sh """ 
                 echo "Build tag is ${buildTag} "
-                docker build -t ${regUrl}/${appImage}:${buildTag} . 
-                docker build -t ${regUrl}/${apiImage}:${buildTag}  ${dockerRepo}/
-                docker push $regUrl/$appImage:${buildTag}
-                docker push $regUrl/$apiImage:${buildTag}
+                docker build -t ${regUrl}/${appImage}:${buildNumber} . 
+                docker build -t ${regUrl}/${apiImage}:${buildNumber}  ${dockerRepo}/
+                docker push $regUrl/$appImage:${buildNumber}
+                docker push $regUrl/$apiImage:${buildNumber}
                 """
                     }
             }
@@ -53,7 +54,23 @@ pipeline {
                 ignoreImageBuildTime:true
             }
         }*/
-             stage('Deploy image'){
+           stage("Deploy to AKS Prod-Ext") {
+          //  def ticketId = mozart.openAksRfc(buildProdMozartRequest())
+          //  withCredentials([prodAzureSecretRepo]) {
+              environment = 'dev'
+              namespace = 'jenkins'
+              acr = 'k8workshopregistry'
+              sh "./deploy-jenkins.sh " +
+                "${pullSecret} " + //repo
+                "${environment} " + //environment
+                "${namespace} " + //namespace
+              //  "${IMAGE_NAME} " + //image name
+                "${env.BUILD_ID} " + //image version
+             //   "${DOCKER_REPO} " + //docker repo
+                "${acr} " + //azure registry
+                "3" // replica count
+            }
+           /*  stage('Deploy image'){
 		          steps {
                       sh """
         		      kubectl apply -f ./spring-boot-deployment.yaml
@@ -61,7 +78,7 @@ pipeline {
 		              kubectl get pods
                       """
 		              }
-	   	 }
+	   	 }*/
 
         }
  }
