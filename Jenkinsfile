@@ -7,7 +7,7 @@ pipeline {
           def dockerRepo = "angular-ui"
           def latestTag = "latest";
           buildNumber = "${env.BUILD_ID}"
-          branchName = "${env.BRANCH_NAME}"'
+          branchName = "${env.BRANCH_NAME}"
           def buildTag = "Build-${BUILD_NUMBER}";
           def releaseTag = "qa";
      }
