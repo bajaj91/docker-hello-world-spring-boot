@@ -6,6 +6,7 @@ pipeline {
           def apiImage = "angular-ui"
           def dockerRepo = "angular-ui"
           def latestTag = "latest";
+          def buildNumber = env.BUILD_ID
           def buildTag = "Build-${BUILD_NUMBER}";
           def releaseTag = "qa";
      }
@@ -13,7 +14,7 @@ pipeline {
     stages {
         stage('Get a Maven project') {
            steps {
-            sh "whoami"
+            echo $buildNumber
             sh 'mvn -Dmaven.test.failure.ignore clean package'
             } 
           }
