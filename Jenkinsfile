@@ -18,10 +18,6 @@ pipeline {
   
     stages {
         stage('Get a Maven project') {
-         // agent { docker 'maven:3.8.1-adoptopenjdk-11' }
-         agent {
-                docker { image 'maven:3-alpine' }
-            }
            steps {
             sh 'mvn -Dmaven.test.failure.ignore clean package'
             } 
@@ -42,7 +38,7 @@ pipeline {
 		      steps {
       twistlock.scanImage("k8workshopregistry.azurecr.io/hello-world-java:latest")
     }
-	      }	    */  
+	      }	      
 
         
         stage('Scan') {
@@ -59,7 +55,7 @@ pipeline {
                 resultsFile: 'prisma-cloud-scan-results.json',
                 ignoreImageBuildTime:true
             }
-        }
+        }*/
              stage('Deploy image'){
 		          steps {
                       sh """
