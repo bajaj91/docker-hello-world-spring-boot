@@ -6,7 +6,7 @@
 
 
 pipeline {
-  agent any 
+  agent any {
      environment {
           def regUrl = "k8workshopregistry.azurecr.io"
           def appImage = "hello-world-java";
@@ -15,6 +15,7 @@ pipeline {
           def buildTag = "Build-${BUILD_NUMBER}";
           def releaseTag = "qa";
      }
+  }
     stages {
         stage('Get a Maven project') {
            steps {
@@ -38,6 +39,7 @@ pipeline {
       twistlock.scanImage("k8workshopregistry.azurecr.io/hello-world-java:latest")
     }
 	      }	    */  
+
         
         stage('Scan') {
             steps {
