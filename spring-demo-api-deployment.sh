@@ -85,7 +85,7 @@ spec:
             port: ${HTTP_CONTAINER_PORT}
             httpHeaders:
             - name: Custom-Header
-              value: "Hello World"
+              value: "Hello World 2021"
           initialDelaySeconds: 15
           periodSeconds: 10
           timeoutSeconds: 30
@@ -96,7 +96,7 @@ spec:
             port: ${HTTP_CONTAINER_PORT}
             httpHeaders:
             - name: Custom-Header
-              value: "Hello World"
+              value: "Hello World 2021"
           initialDelaySeconds: 20
           periodSeconds: 3
       imagePullSecrets:
