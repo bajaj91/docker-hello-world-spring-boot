@@ -15,7 +15,7 @@ pipeline {
     stages {
         stage('Get a Maven project') {
            steps {
-            echo 'BRANCH_NAE'
+            echo 'BRANCH_NAME'
             sh "echo ${buildNumber}"
             sh 'printenv'
             sh 'mvn -Dmaven.test.failure.ignore clean package'
