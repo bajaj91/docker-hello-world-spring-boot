@@ -18,7 +18,7 @@ pipeline {
   
     stages {
         stage('Get a Maven project') {
-          agent { docker 'maven:3.8.1-adoptopenjdk-11' }
+         // agent { docker 'maven:3.8.1-adoptopenjdk-11' }
            steps {
             sh 'mvn -Dmaven.test.failure.ignore clean package'
             } 
