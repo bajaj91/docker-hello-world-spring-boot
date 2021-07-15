@@ -4,6 +4,7 @@ pipeline {
           def regUrl = "k8workshopregistry.azurecr.io"
           def appImage = "hello-world-java";
           def apiImage = "angular-ui"
+          def dockerRepo = "angular-ui"
           def latestTag = "latest";
           def buildTag = "Build-${BUILD_NUMBER}";
           def releaseTag = "qa";
@@ -22,7 +23,7 @@ pipeline {
                 steps {
                 sh """ 
                 docker build -t $regUrl/$appImage:$latestTag . 
-                docker build -t $regUrl/$apiImage:$latestTag  UI/ 
+                docker build -t $regUrl/$apiImage:$latestTag  ${dockerRepo}/
                 docker push $regUrl/$appImage:$latestTag
                 docker push $regUrl/$apiImage:$latestTag
                 """
@@ -30,7 +31,7 @@ pipeline {
             }
 	    /*  stage('Vulnerability Scan w/Twistlock') {
 		      steps {
-      twistlock.scanImage("k8workshopregistry.azurecr.io/hello-world-java:latest")
+                twistlock.scanImage("k8workshopregistry.azurecr.io/hello-world-java:latest")
     }
 	      }	      
 
