@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Get a Maven project') {
            steps {
-            echo $buildNumber
+            echo ${env.BUILD_ID}
             sh 'mvn -Dmaven.test.failure.ignore clean package'
             } 
           }
