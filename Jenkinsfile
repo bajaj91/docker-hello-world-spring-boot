@@ -7,7 +7,7 @@ pipeline {
           def dockerRepo = "angular-ui"
           def latestTag = "latest";
           buildNumber = "${env.BUILD_ID}"
-          branchName = "${env.BRANCH_NAME}"
+          branchName = "${env.GIT_BRANCH}"
           def buildTag = "Build-${BUILD_NUMBER}";
           def releaseTag = "qa";
      }
@@ -15,8 +15,8 @@ pipeline {
     stages {
         stage('Get a Maven project') {
            steps {
-            echo "Git Branch Name Is ${buildNumber}"
-            echo "Build ID Is ${branchName}"
+            echo "build ID is ${buildNumber}"
+            echo "branch name is ${branchName}"
             //sh "echo ${buildNumber}"
             //sh 'printenv'
             sh 'mvn -Dmaven.test.failure.ignore clean package'
