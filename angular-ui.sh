@@ -80,19 +80,11 @@ spec:
           limits:
             memory: '200Mi'
             cpu: '500m'
-        ports:
-          - containerPort: ${HTTPS_CONTAINER_PORT}
-            name: https
-        ports:
-          - name: liveness-port
-            containerPort: 8443
         livenessProbe:
-          httpGet:
-            scheme: HTTPS
-            path: /
+          tcpSocket:
             port: ${HTTP_CONTAINER_PORT}
           initialDelaySeconds: 15
-          periodSeconds: 10
+          periodSeconds: 3
           timeoutSeconds: 30
           successThreshold: 1
           failureThreshold: 5

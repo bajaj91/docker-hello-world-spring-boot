@@ -38,7 +38,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: spring-boot-api-${ENVIRONMENT}
+    app: spring-demo-api-${ENVIRONMENT}
   ports:
     - protocol: TCP
       port: 8443
@@ -58,19 +58,19 @@ metadata:
   name: ${DEPLOYMENT_NAME}
   namespace: ${NAMESPACE}
   labels:
-    app: spring-boot-api-${ENVIRONMENT}
+    app: spring-demo-api-${ENVIRONMENT}
 spec:
   replicas: ${REPLICAS}
   selector:
     matchLabels:
-      app: spring-boot-api-${ENVIRONMENT}
+      app: spring-demo-api-${ENVIRONMENT}
   template:
     metadata:
       labels:
-        app: spring-boot-api-${ENVIRONMENT}
+        app: spring-demo-api-${ENVIRONMENT}
     spec:
       containers:
-      - name: spring-boot-api-${ENVIRONMENT}
+      - name: spring-demo-api-${ENVIRONMENT}
         image: ${ACR}.azurecr.io/spring-demo-api:${IMAGE_VERSION}
         imagePullPolicy: Always
         resources:
@@ -80,22 +80,25 @@ spec:
           limits:
             memory: '200Mi'
             cpu: '500m'
-        ports:
-          - containerPort: ${HTTPS_CONTAINER_PORT}
-            name: https
-        ports:
-          - name: liveness-port
-            containerPort: 8443
         livenessProbe:
           httpGet:
-            scheme: HTTPS
-            path: /
             port: ${HTTP_CONTAINER_PORT}
+            httpHeaders:
+            - name: Custom-Header
+              value: "Hello World"
           initialDelaySeconds: 15
           periodSeconds: 10
           timeoutSeconds: 30
           successThreshold: 1
           failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            port: ${HTTP_CONTAINER_PORT}
+            httpHeaders:
+            - name: Custom-Header
+              value: "Hello World"
+          initialDelaySeconds: 10
+          periodSeconds: 3
       imagePullSecrets:
         - name: ${PULL_SECRET}
 " > deployment.yaml
