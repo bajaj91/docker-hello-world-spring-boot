@@ -75,11 +75,11 @@ spec:
         imagePullPolicy: Always
         resources:
           requests:
-            memory: '20Mi'
-            cpu: '100m'
+            memory: '200Mi'
+            cpu: '500m'
           limits:
-            memory: '20Mi'
-            cpu: '100m'
+            memory: '200Mi'
+            cpu: '500m'
         ports:
           - containerPort: ${HTTPS_CONTAINER_PORT}
             name: https
@@ -91,7 +91,7 @@ spec:
             scheme: HTTPS
             path: /
             port: ${HTTP_CONTAINER_PORT}
-          initialDelaySeconds: 3
+          initialDelaySeconds: 15
           periodSeconds: 10
           timeoutSeconds: 30
           successThreshold: 1
