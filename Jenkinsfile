@@ -6,7 +6,7 @@
 
 
 pipeline {
-  agent none 
+  agent any 
      environment {
           def regUrl = "k8workshopregistry.azurecr.io"
           def appImage = "hello-world-java";
