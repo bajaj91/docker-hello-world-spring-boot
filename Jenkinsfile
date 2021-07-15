@@ -69,7 +69,7 @@ pipeline {
                 "${env.BUILD_ID} " + //image version
              //   "${DOCKER_REPO} " + //docker repo
                 "${acr} " + //azure registry
-                "3" // replica count
+                "1" // replica count
                }
             }
            /*  stage('Deploy image'){
