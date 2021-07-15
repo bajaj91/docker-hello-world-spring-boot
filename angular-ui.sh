@@ -41,11 +41,11 @@ spec:
     app: angular-ui-${ENVIRONMENT}
   ports:
     - protocol: TCP
-      port: 8443
+      port: 443
       targetPort: ${HTTPS_CONTAINER_PORT}
       name: https
     - protocol: TCP
-      port: 8080
+      port: 80
       targetPort: ${HTTP_CONTAINER_PORT}
       name: http
 " > service.yaml
