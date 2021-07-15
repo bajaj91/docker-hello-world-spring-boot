@@ -11,6 +11,9 @@ pipeline {
           def buildTag = "build-${BUILD_NUMBER}";
           def releaseTag = "qa";
           def pullSecret = "acr-secret"
+          def environment = "dev"
+          def namespace = "jenkins"
+          def acr = "k8workshopregistry"
      }
   
     stages {
@@ -58,9 +61,6 @@ pipeline {
               steps {
           //  def ticketId = mozart.openAksRfc(buildProdMozartRequest())
           //  withCredentials([prodAzureSecretRepo]) {
-              environment = 'dev'
-              namespace = 'jenkins'
-              acr = 'k8workshopregistry'
               sh "./deploy-jenkins.sh " +
                 "${pullSecret} " + //repo
                 "${environment} " + //environment
