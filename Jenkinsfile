@@ -86,6 +86,7 @@ pipeline {
                 "${acr} " + //azure registry
                 "1" // replica count
                }
+	   }
            /*  stage('Deploy image'){
 		          steps {
                       sh """
