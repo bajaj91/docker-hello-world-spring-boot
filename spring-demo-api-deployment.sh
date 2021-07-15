@@ -97,7 +97,7 @@ spec:
             httpHeaders:
             - name: Custom-Header
               value: "Hello World"
-          initialDelaySeconds: 10
+          initialDelaySeconds: 20
           periodSeconds: 3
       imagePullSecrets:
         - name: ${PULL_SECRET}
