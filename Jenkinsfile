@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Get a Maven project') {
            steps {
-            echo ${env.BRANCH_NAME}
+            echo "${env.BRANCH_NAME}"
             sh 'mvn -Dmaven.test.failure.ignore clean package'
             } 
           }
