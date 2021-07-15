@@ -43,7 +43,6 @@ pipeline {
 
         
         stage('Scan') {
-          agent { alpine 'twistian/alpine:latest' }
             steps {
                 // Scan the image
                 prismaCloudScanImage ca: '',
