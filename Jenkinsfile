@@ -46,6 +46,19 @@ pipeline {
                 twistlock.scanImage("k8workshopregistry.azurecr.io/hello-world-java:latest")
     }
 	      }	      
+                   stage("Authenticate Service Account") {
+     		         steps {
+               // withCredentials([azureServiceAccount, azureTenantId, devSixClusterName, resourceGroup]) {
+               //   sh 'chmod -R 777 ./bin/aks'
+                  sh "./bin/authenticate-az-service-account.sh " +
+                    "${env.AKS_SRVC_USER} " +
+                    "${env.AKS_SRVC_PASSWORD} " +
+                    "${env.TENANT_ID} " +
+                    "${RESOURCE_GROUP} " +
+                    "${CLUSTER_NAME}"
+                        }
+              }
+
 
         
         stage('Scan') {
@@ -79,18 +92,6 @@ pipeline {
                 "1" // replica count
                }
             }
-            stage("Authenticate Service Account") {
-              steps {
-	       // withCredentials([azureServiceAccount, azureTenantId, devSixClusterName, resourceGroup]) {
-	       //   sh 'chmod -R 777 ./bin/aks'
-        	  sh "./bin/authenticate-az-service-account.sh " +
-	            "${env.AKS_SRVC_USER} " +
-        	    "${env.AKS_SRVC_PASSWORD} " +
-	            "${env.TENANT_ID} " +
-        	    "${RESOURCE_GROUP} " +
-	            "${CLUSTER_NAME}"
-		        }
-	      }
            stage("Deploy Angular-UI") {
               steps {
           //  def ticketId = mozart.openAksRfc(buildProdMozartRequest())
