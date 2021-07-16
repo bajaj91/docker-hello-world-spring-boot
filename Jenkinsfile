@@ -15,7 +15,7 @@ pipeline {
           def namespace = "jenkins"
           def acr = "k8workshopregistry"
           def AKS_SRVC_USER = "e544388b-8114-4c6b-bf63-622229700801"
-          def AKS_SRVC_PASSWORD = "Y-QE.u749jYprWEL5egYCiWSgxaghkj3CC"
+          def AKS_SRVC_PASSWORD = ""
           def TENANT_ID = "5f9d8183-ac49-417b-95c3-f12d0b218595"
           def RESOURCE_GROUP = "RSG-AKSDemo"
 	  def CLUSTER_NAME = "DemoMicroservices"
