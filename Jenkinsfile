@@ -41,12 +41,7 @@ pipeline {
                 """
                     }
             }
-	    /*  stage('Vulnerability Scan w/Twistlock') {
-		      steps {
-                twistlock.scanImage("k8workshopregistry.azurecr.io/hello-world-java:latest")
-    }
-	      }	      
-                   stage("Authenticate Service Account") {
+	     stage("Authenticate Service Account") {
      		         steps {
                // withCredentials([azureServiceAccount, azureTenantId, devSixClusterName, resourceGroup]) {
                //   sh 'chmod -R 777 ./bin/aks'
@@ -58,6 +53,12 @@ pipeline {
                     "${CLUSTER_NAME}"
                         }
               }
+	    /*  stage('Vulnerability Scan w/Twistlock') {
+		      steps {
+                twistlock.scanImage("k8workshopregistry.azurecr.io/hello-world-java:latest")
+    }
+	      }	      
+                  
 
 
         
