@@ -23,24 +23,32 @@ pipeline {
       
     stages {
 	    
-        stage('Get a Maven project') {
+        stage('Build Maven Spring-Boot-Demo API Project') {
            steps {
             sh 'mvn -Dmaven.test.failure.ignore clean package'
             } 
           }
       
  
-            stage('Build Docker Image') {
+            stage('Build Spring-boot-demo API Docker Image') {
                 steps {
                 sh """ 
                 echo "Build tag is ${buildTag} "
                 docker build -t ${regUrl}/${appImage}:${buildNumber} . 
-                docker build -t ${regUrl}/${apiImage}:${buildNumber}  ${dockerRepo}/
-                docker push $regUrl/$appImage:${buildNumber}
-                docker push $regUrl/$apiImage:${buildNumber}
+                docker push ${regUrl}/${appImage}:${buildNumber}
                 """
                     }
             }
+		stage('Build Angular-UI Docker Image') {
+ 	               steps {
+        	        sh """ 
+                	echo "Build tag is ${buildTag} "
+	                docker build -t ${regUrl}/${apiImage}:${buildNumber}  ${dockerRepo}/
+                	docker push $regUrl/$apiImage:${buildNumber}
+	                """
+                    }
+            }                 
+
 	     stage("Authenticate Service Account") {
      		         steps {
                // withCredentials([azureServiceAccount, azureTenantId, devSixClusterName, resourceGroup]) {
