@@ -32,8 +32,6 @@ echo "apiVersion: v1
 kind: Service
 metadata:
   name: ${DEPLOYMENT_SERVICE}
-  annotations:
-    service.beta.kubernetes.io/azure-dns-label-name: pqa-prod-${ENVIRONMENT}
   namespace: ${NAMESPACE}
 spec:
   type: LoadBalancer
