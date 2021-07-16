@@ -14,11 +14,6 @@ pipeline {
           def environment = "dev"
           def namespace = "jenkins"
           def acr = "k8workshopregistry"
-          def AKS_SRVC_USER = "e544388b-8114-4c6b-bf63-622229700801"
-          def AKS_SRVC_PASSWORD = "Y-QE.u749jYprWEL5egYCiWSgxaghkj3CC"
-          def TENANT_ID = "5f9d8183-ac49-417b-95c3-f12d0b218595"
-          def RESOURCE_GROUP = "RSG-AKSDemo"
-	  def CLUSTER_NAME = "DemoMicroservices"
      }
   
     stages {
@@ -77,18 +72,6 @@ pipeline {
                 "1" // replica count
                }
             }
-            stage("Authenticate Service Account") {
-              steps {
-	       // withCredentials([azureServiceAccount, azureTenantId, devSixClusterName, resourceGroup]) {
-	       //   sh 'chmod -R 777 ./bin/aks'
-        	  sh "./bin/authenticate-az-service-account.sh " +
-	            "${env.AKS_SRVC_USER} " +
-        	    "${env.AKS_SRVC_PASSWORD} " +
-	            "${env.TENANT_ID} " +
-        	    "${RESOURCE_GROUP} " +
-	            "${CLUSTER_NAME}"
-		        }
-	      }
            stage("Deploy Angular-UI") {
               steps {
           //  def ticketId = mozart.openAksRfc(buildProdMozartRequest())
@@ -104,11 +87,16 @@ pipeline {
                 "1" // replica count
                }
 	   }
-        	 stage("Unauthenticate Service Account") {
-	           steps {
-		        sh "./bin/unauthenticate-service-account.sh"
-      			}
-	}
-    }
+           /*  stage('Deploy image'){
+		          steps {
+                      sh """
+        		      kubectl apply -f ./spring-boot-deployment.yaml
+		              kubectl apply -f ./spring-angular-ui.yaml
+		              kubectl get pods
+                      """
+		              }
+	   	 }*/
+
+        }
  }
 
