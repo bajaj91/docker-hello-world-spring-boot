@@ -76,10 +76,10 @@ spec:
         resources:
           requests:
             memory: '200Mi'
-            cpu: '500m'
+            cpu: '100m'
           limits:
             memory: '200Mi'
-            cpu: '500m'
+            cpu: '300m'
         livenessProbe:
           httpGet:
             port: ${HTTP_CONTAINER_PORT}
