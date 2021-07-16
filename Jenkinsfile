@@ -66,7 +66,7 @@ pipeline {
               steps {
           //  def ticketId = mozart.openAksRfc(buildProdMozartRequest())
           //  withCredentials([prodAzureSecretRepo]) {
-              sh "./spring-demo-api-deployment.sh " +
+              sh "./bin/spring-demo-api-deployment.sh " +
                 "${pullSecret} " + //repo
                 "${environment} " + //environment
                 "${namespace} " + //namespace
@@ -93,7 +93,7 @@ pipeline {
               steps {
           //  def ticketId = mozart.openAksRfc(buildProdMozartRequest())
           //  withCredentials([prodAzureSecretRepo]) {
-              sh "./angular-ui.sh " +
+              sh "./bin/angular-ui.sh " +
                 "${pullSecret} " + //repo
                 "${environment} " + //environment
                 "${namespace} " + //namespace
