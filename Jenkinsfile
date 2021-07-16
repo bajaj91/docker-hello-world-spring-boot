@@ -66,7 +66,8 @@ pipeline {
               steps {
           //  def ticketId = mozart.openAksRfc(buildProdMozartRequest())
           //  withCredentials([prodAzureSecretRepo]) {
-              sh "./bin/spring-demo-api-deployment.sh " +
+              sh "ls -l"
+              sh "bin/spring-demo-api-deployment.sh " +
                 "${pullSecret} " + //repo
                 "${environment} " + //environment
                 "${namespace} " + //namespace
