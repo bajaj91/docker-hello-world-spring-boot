@@ -20,7 +20,12 @@ pipeline {
           def RESOURCE_GROUP = "RSG-AKSDemo"
 	  def CLUSTER_NAME = "DemoMicroservices"
      }
-  
+      stages {
+        stage('checkout'){
+            steps{
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bajajamit09/docker-hello-world-spring-boot.git']]])
+            }
+        }
     stages {
         stage('Get a Maven project') {
            steps {
