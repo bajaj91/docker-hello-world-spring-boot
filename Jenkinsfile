@@ -22,11 +22,7 @@ pipeline {
      }
       
     stages {
-	    stage('Git Checkout'){
-            steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bajajamit09/docker-hello-world-spring-boot.git']]])
-            }
-        }
+	    
         stage('Get a Maven project') {
            steps {
             sh 'mvn -Dmaven.test.failure.ignore clean package'
