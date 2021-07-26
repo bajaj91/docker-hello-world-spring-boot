@@ -98,7 +98,7 @@ pipeline {
                 "${env.BUILD_ID} " + //image version
              //   "${DOCKER_REPO} " + //docker repo
                 "${acr} " + //azure registry
-                "1" // replica count
+                "3" // replica count
                }
             }
            stage("Deploy Angular-UI") {
@@ -113,7 +113,7 @@ pipeline {
                 "${env.BUILD_ID} " + //image version
              //   "${DOCKER_REPO} " + //docker repo
                 "${acr} " + //azure registry
-                "1" // replica count
+                "3" // replica count
                }
 	   }
         	 stage("Unauthenticate Service Account") {
