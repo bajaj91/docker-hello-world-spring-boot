@@ -6,8 +6,8 @@ pipeline {
           def apiImage = "angular-ui"
           def dockerRepo = "angular-ui"
           def latestTag = "latest";
-          buildNumber = "${env.BUILD_ID}"
-          branchName = "${env.GIT_BRANCH}"
+          def buildNumber = "${env.BUILD_ID}"
+          def branchName = "${env.GIT_BRANCH}"
           def buildTag = "build-${BUILD_NUMBER}";
           def releaseTag = "qa";
           def pullSecret = "acr-secret"
@@ -19,6 +19,9 @@ pipeline {
           def TENANT_ID = "5f9d8183-ac49-417b-95c3-f12d0b218595"
           def RESOURCE_GROUP = "RSG-AKSDemo"
 	  def CLUSTER_NAME = "DemoMicroservices"
+          def INGRESS_HOSTNAME_SPRING_DEMO = "${appImage}-app.aks.cloudapp.azure.com"
+          def INGRESS_HOSTNAME_SPRING_API = "${apiImage}-app.aks.cloudapp.azure.com"
+        
      }
       
     stages {

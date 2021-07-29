@@ -34,7 +34,7 @@ metadata:
   name: ${DEPLOYMENT_SERVICE}
   namespace: ${NAMESPACE}
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: spring-demo-api-${ENVIRONMENT}
   ports:
@@ -78,7 +78,7 @@ spec:
         imagePullPolicy: Always
         resources:
           requests:
-            memory: '200Mi'
+          G  memory: '200Mi'
             cpu: '100m'
           limits:
             memory: '200Mi'
@@ -108,3 +108,27 @@ spec:
 
 # Deploy the application containers to the cluster with kubernetes
 kubectl apply -f deployment.yaml -o json --wait --timeout 90s
+echo "apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+  name: demo1-ingress
+  namespace: jenkins
+spec:
+  rules:
+  - host: ${INGRESS_HOSTNAME_SPRING_DEMO}
+    http:
+      paths:
+      - backend:
+          serviceName: ${DEPLOYMENT_SERVICE}
+          servicePort: ${HTTP_CONTAINER_PORT}
+        path: /
+        pathType: Prefix
+" > ingress.yaml
+
+#Deploy Ingress
+kubectl apply -f ingress.yaml --wait 
