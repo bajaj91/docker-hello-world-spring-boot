@@ -99,7 +99,7 @@ spec:
 # Deploy the application containers to the cluster with kubernetes
 kubectl apply -f deployment.yaml -o json --wait --timeout 90s
 #Deploy Igress
-echo "apiVersion: networking.k8s.io/v1
+echo "apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   annotations:
