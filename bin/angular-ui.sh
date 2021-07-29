@@ -103,10 +103,10 @@ echo "apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-     nginx.ingress.kubernetes.io/ssl-redirect: "false"
-     kubernetes.io/ingress.class: "nginx"
-     nginx.ingress.kubernetes.io/use-regex: "true"
-     nginx.ingress.kubernetes.io/rewrite-target: "/$1"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: "/$1"
   name: ${INGRESS_NAME}
   namespace: jenkins
 spec:
