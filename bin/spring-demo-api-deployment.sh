@@ -129,4 +129,4 @@ spec:
 " > ingress.yaml
 
 #Deploy Ingress
-kubectl apply -f ingress.yaml --wait 
+kubectl apply -f ingress.yaml --wait -validate=false 
