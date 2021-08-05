@@ -24,7 +24,8 @@ DEPLOYMENT_POD="spring-demo-api-${ENVIRONMENT}-pod"
 DEPLOYMENT_SERVICE="spring-demo-api-${ENVIRONMENT}-service"
 HTTPS_CONTAINER_PORT=8443
 HTTP_CONTAINER_PORT=8080
-INGRESS_NAME="spring-demo"
+INGRESS_NAME="spring-demo-${ENVIRONMENT}-ingress"
+
 
 # Prints all executed commands to terminal
 set -x

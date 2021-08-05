@@ -24,7 +24,7 @@ DEPLOYMENT_POD="angular-ui-${ENVIRONMENT}-pod"
 DEPLOYMENT_SERVICE="angular-ui-${ENVIRONMENT}-service"
 HTTPS_CONTAINER_PORT=443
 HTTP_CONTAINER_PORT=80
-INGRESS_NAME=spring-api
+INGRESS_NAME="angular-ui-${ENVIRONMENT}-ingress"
 
 # Prints all executed commands to terminal
 set -x
