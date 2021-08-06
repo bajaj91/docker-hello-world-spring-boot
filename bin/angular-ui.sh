@@ -108,8 +108,7 @@ metadata:
   namespace: jenkins
 spec:
   rules:
-  - host: ${INGRESS_HOSTNAME_SPRING_API}
-    http:
+  - http:
       paths:
       - backend:
           serviceName: ${DEPLOYMENT_SERVICE}
